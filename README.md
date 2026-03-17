@@ -2,6 +2,10 @@
 
 A [Local WP](https://localwp.com/) add-on that gives you quick developer shortcuts — open a terminal, launch Claude Code, copy folder paths, or reveal folders in Finder — all from within Local's site interface.
 
+## Demo
+
+https://github.com/user-attachments/assets/demo.mp4
+
 ## Features
 
 - **Open Terminal** — Open any WordPress folder in your preferred terminal (Ghostty > iTerm > Terminal.app on macOS)
