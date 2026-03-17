@@ -4,7 +4,7 @@ A [Local WP](https://localwp.com/) add-on that gives you quick developer shortcu
 
 ## Demo
 
-https://github.com/user-attachments/assets/demo.mp4
+https://github.com/aslamdoctor/local-addon-dev-shortcuts/raw/master/assets/demo.mp4
 
 ## Features
 
