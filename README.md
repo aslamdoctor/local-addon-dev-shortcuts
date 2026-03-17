@@ -1,58 +1,85 @@
-# Local Boilerplate Add-on
+# Open Terminal — Local WP Add-on
 
-https://build.localwp.com/
+A [Local WP](https://localwp.com/) add-on that lets you quickly open a terminal, launch Claude Code, copy folder paths, or reveal folders in Finder — all from within Local's site interface.
 
-## Get Started with the Local Add-on Generator
+## Features
 
-Get up and running with your new add-on quickly and easily with the [Local Add-on Generator](https://github.com/getflywheel/create-local-addon). It is super simple to set up, and can help you start developing your new add-on in no time!
+- **Open Terminal** — Open any WordPress folder in your preferred terminal (Ghostty > iTerm > Terminal.app on macOS)
+- **Claude Code** — Launch [Claude Code](https://claude.ai/claude-code) in a new terminal window at any site folder
+- **Copy Path** — Copy the full path of any WordPress folder to your clipboard
+- **Reveal in Finder** — Open the selected folder in Finder / Explorer / file manager
 
-The generator uses this boilerplate add-on to get you started, making setup easy and fast. The README for the generator also has more information on how to create an amazing add-on for Local, so be sure to check it out!
+The folder picker shows all key WordPress directories grouped by category:
+- **WordPress** — Root, wp-content, plugins, themes
+- **Plugins** — Each installed plugin's directory
+- **Themes** — Each installed theme's directory
+
+## Screenshots
+
+Select a folder from the dropdown, then use any of the action buttons:
+
+![Open Terminal Add-on](https://img.shields.io/badge/Local_WP-Add--on-51bb7b)
 
 ## Installation
 
-### Clone
+### Quick Install
 
-Clone the repository into the following directory depending on your platform:
+1. Clone or download this repo into your Local add-ons directory:
 
--   macOS: `~/Library/Application Support/Local/addons`
--   Windows: `C:\Users\username\AppData\Roaming\Local\addons`
--   Debian Linux: `~/.config/Local/addons`
+   - **macOS:** `~/Library/Application Support/Local/addons`
+   - **Windows:** `C:\Users\<username>\AppData\Roaming\Local\addons`
+   - **Linux:** `~/.config/Local/addons`
 
-*You can replace 'Local' with 'Local Beta' if you want to create the add-on for Local Beta.*
+2. Install dependencies and build:
 
-### Install Add-on Dependencies
+   ```bash
+   cd open-terminal-in-folder
+   npm install
+   npm run build
+   ```
 
-`yarn install`
+3. Restart Local and enable the add-on in **Preferences > Add-ons**
 
-### Add Add-on to Local
+### Symlink Install (for development)
 
-1. Clone repo directly into the add-ons folder (paths described above)
-2. `yarn install` (install dependencies)
-2. `yarn build`
-3. Open Local and enable add-on
+```bash
+ln -s /path/to/open-terminal-in-folder ~/Library/Application\ Support/Local/addons/open-terminal
+```
+
+## Usage
+
+1. Select a site in Local
+2. Go to the **Tools** tab
+3. Click **Open Terminal**
+4. Choose a folder from the dropdown
+5. Click any action button
+
+## Terminal Support
+
+### macOS
+Opens in the first available terminal: **Ghostty** > **iTerm** > **Terminal.app**
+
+### Windows
+Opens in the first available terminal: **Windows Terminal** > **cmd.exe**
+
+### Linux
+Opens in the first available terminal: **gnome-terminal** > **konsole** > **xfce4-terminal** > **xterm**
 
 ## Development
 
-### External Libraries
+```bash
+# Install dependencies
+npm install
 
-- @getflywheel/local provides type definitions for Local's Add-on API.
-	- Node Module: https://www.npmjs.com/package/@getflywheel/local-components
-	- GitHub Repo: https://github.com/getflywheel/local-components
+# Build
+npm run build
 
-- @getflywheel/local-components provides reusable React components to use in your Local add-on.
-	- Node Module: https://www.npmjs.com/package/@getflywheel/local
-	- GitHub Repo: https://github.com/getflywheel/local-addon-api
-	- Style Guide: https://getflywheel.github.io/local-components
+# Watch for changes
+npm run watch
 
-### Folder Structure
-
-All files in `/src` will be transpiled to `/lib` using [TypeScript](https://www.typescriptlang.org/). Anything in `/lib` will be overwritten.
-
-### Development Workflow
-
-If you are looking for help getting started, you can consult [the documentation for the add-on generator](https://github.com/getflywheel/create-local-addon#next-steps).
-
-You can consult the [Local add-on API](https://getflywheel.github.io/local-addon-api), which provides a wide range of values and functions for developing your add-on.
+# Lint
+npm run lint
+```
 
 ## License
 
