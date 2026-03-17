@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableList, TableListRow, FlySelect } from '@getflywheel/local-components';
+import { Button, FlySelect } from '@getflywheel/local-components';
 
 /* eslint-disable @typescript-eslint/no-var-requires */
 const packageJSON = require('../package.json');
@@ -142,6 +142,20 @@ function openClaudeCode (folderPath: string): void {
 	}
 }
 
+function openInFinder (folderPath: string): void {
+	switch (process.platform) {
+		case 'darwin':
+			exec(`open "${folderPath}"`);
+			break;
+		case 'win32':
+			exec(`explorer "${folderPath}"`);
+			break;
+		case 'linux':
+			exec(`xdg-open "${folderPath}"`);
+			break;
+	}
+}
+
 function copyToClipboard (text: string): void {
 	if (navigator && navigator.clipboard) {
 		navigator.clipboard.writeText(text);
@@ -156,14 +170,36 @@ function OpenTerminalPage (props) {
 	}
 
 	const { options, optionGroups } = buildOptions(site.path);
+	const buttonsId = 'open-terminal-buttons-' + site.id;
+	const selectedPathId = 'open-terminal-selected-path-' + site.id;
 	const noticeId = 'copy-path-notice-' + site.id;
+	let selectedFolder = '';
 
-	function showCopiedNotice (folderPath: string) {
-		copyToClipboard(folderPath);
+	function onFolderSelected (value) {
+		selectedFolder = value;
+		const buttonsEl = document.getElementById(buttonsId);
+		const pathEl = document.getElementById(selectedPathId);
+
+		if (buttonsEl) {
+			buttonsEl.style.display = 'flex';
+		}
+
+		if (pathEl) {
+			pathEl.textContent = value;
+			pathEl.style.display = 'block';
+		}
+	}
+
+	function handleCopyPath () {
+		if (!selectedFolder) {
+			return;
+		}
+
+		copyToClipboard(selectedFolder);
 		const el = document.getElementById(noticeId);
 
 		if (el) {
-			el.textContent = `Copied: ${folderPath}`;
+			el.textContent = `Copied: ${selectedFolder}`;
 			el.style.display = 'block';
 			setTimeout(() => {
 				el.style.display = 'none';
@@ -172,37 +208,54 @@ function OpenTerminalPage (props) {
 	}
 
 	return (
-		<div style={{ flex: '1', overflowY: 'auto', margin: '10px' }}>
-			<TableList>
-				<TableListRow key="open-terminal" label="Open Terminal">
-					<FlySelect
-						placeholder="Select a folder to open in terminal..."
-						onChange={(value) => openTerminal(value)}
-						options={options}
-						optionGroups={optionGroups}
-					/>
-				</TableListRow>
-				<TableListRow key="open-claude-code" label="Claude Code">
-					<FlySelect
-						placeholder="Select a folder to open Claude Code..."
-						onChange={(value) => openClaudeCode(value)}
-						options={options}
-						optionGroups={optionGroups}
-					/>
-				</TableListRow>
-				<TableListRow key="copy-folder-path" label="Copy Path">
-					<FlySelect
-						placeholder="Select a folder to copy its path..."
-						onChange={(value) => showCopiedNotice(value)}
-						options={options}
-						optionGroups={optionGroups}
-					/>
-					<p
-						id={noticeId}
-						style={{ display: 'none', marginTop: '8px', color: '#51bb7b', fontSize: '12px' }}
-					/>
-				</TableListRow>
-			</TableList>
+		<div style={{ flex: '1', overflowY: 'auto', padding: '30px' }}>
+			<div style={{ marginBottom: '20px' }}>
+				<h3 style={{ marginBottom: '4px' }}>Select a folder</h3>
+				<p style={{ marginBottom: '12px', color: '#999', fontSize: '13px' }}>
+					Choose a WordPress folder, then open it in a terminal, launch Claude Code, or copy the path.
+				</p>
+				<FlySelect
+					placeholder="Select a folder..."
+					onChange={(value) => onFolderSelected(value)}
+					options={options}
+					optionGroups={optionGroups}
+				/>
+			</div>
+			<p
+				id={selectedPathId}
+				style={{
+					display: 'none',
+					marginBottom: '16px',
+					padding: '8px 12px',
+					background: 'rgba(0, 0, 0, 0.05)',
+					borderRadius: '4px',
+					fontSize: '12px',
+					fontFamily: 'monospace',
+					color: '#aaa',
+					wordBreak: 'break-all',
+				}}
+			/>
+			<div
+				id={buttonsId}
+				style={{ display: 'none', gap: '10px', alignItems: 'center' }}
+			>
+				<Button onClick={() => openTerminal(selectedFolder)}>
+					Open Terminal
+				</Button>
+				<Button onClick={() => openClaudeCode(selectedFolder)}>
+					Open Claude Code
+				</Button>
+				<Button onClick={() => handleCopyPath()}>
+					Copy Path
+				</Button>
+				<Button onClick={() => openInFinder(selectedFolder)}>
+					Reveal in Finder
+				</Button>
+			</div>
+			<p
+				id={noticeId}
+				style={{ display: 'none', marginTop: '8px', color: '#51bb7b', fontSize: '12px' }}
+			/>
 		</div>
 	);
 }
