@@ -1,6 +1,6 @@
-# Open Terminal — Local WP Add-on
+# Dev Shortcuts — Local WP Add-on
 
-A [Local WP](https://localwp.com/) add-on that lets you quickly open a terminal, launch Claude Code, copy folder paths, or reveal folders in Finder — all from within Local's site interface.
+A [Local WP](https://localwp.com/) add-on that gives you quick developer shortcuts — open a terminal, launch Claude Code, copy folder paths, or reveal folders in Finder — all from within Local's site interface.
 
 ## Features
 
@@ -13,12 +13,6 @@ The folder picker shows all key WordPress directories grouped by category:
 - **WordPress** — Root, wp-content, plugins, themes
 - **Plugins** — Each installed plugin's directory
 - **Themes** — Each installed theme's directory
-
-## Screenshots
-
-Select a folder from the dropdown, then use any of the action buttons:
-
-![Open Terminal Add-on](https://img.shields.io/badge/Local_WP-Add--on-51bb7b)
 
 ## Installation
 
@@ -33,7 +27,7 @@ Select a folder from the dropdown, then use any of the action buttons:
 2. Install dependencies and build:
 
    ```bash
-   cd open-terminal-in-folder
+   cd local-addon-dev-shortcuts
    npm install
    npm run build
    ```
@@ -43,14 +37,14 @@ Select a folder from the dropdown, then use any of the action buttons:
 ### Symlink Install (for development)
 
 ```bash
-ln -s /path/to/open-terminal-in-folder ~/Library/Application\ Support/Local/addons/open-terminal
+ln -s /path/to/local-addon-dev-shortcuts ~/Library/Application\ Support/Local/addons/dev-shortcuts
 ```
 
 ## Usage
 
 1. Select a site in Local
 2. Go to the **Tools** tab
-3. Click **Open Terminal**
+3. Click **Dev Shortcuts**
 4. Choose a folder from the dropdown
 5. Click any action button
 

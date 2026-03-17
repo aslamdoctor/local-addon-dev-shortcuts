@@ -266,7 +266,7 @@ export default function (context): void {
 	hooks.addFilter('siteInfoToolsItem', (menu) => [
 		...menu,
 		{
-			menuItem: 'Open Terminal',
+			menuItem: 'Dev Shortcuts',
 			path: `/${addonID}`,
 			render: (props) => <OpenTerminalPage {...props} />,
 		},

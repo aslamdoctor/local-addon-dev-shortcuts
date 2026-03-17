@@ -1,6 +1,6 @@
 {
-  "name": "open-terminal",
-  "productName": "Open Terminal",
+  "name": "dev-shortcuts",
+  "productName": "Dev Shortcuts",
   "version": "1.0.0",
   "author": "aslamdoctor",
   "keywords": [
@@ -8,16 +8,16 @@
   ],
   "bgColor": "#51bb7b",
   "icon": "icon.svg",
-  "slug": "open-terminal",
-  "description": "Open a terminal in any WordPress folder for the selected site.",
+  "slug": "dev-shortcuts",
+  "description": "Developer shortcuts for Local WP — open terminal, launch Claude Code, copy paths, and reveal folders.",
   "renderer": "lib/renderer.js",
   "main": "lib/main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/aslamdoctor/local-addon-open-terminal"
+    "url": "https://github.com/aslamdoctor/local-addon-dev-shortcuts"
   },
   "bugs": {
-    "url": "https://github.com/aslamdoctor/local-addon-open-terminal/issues"
+    "url": "https://github.com/aslamdoctor/local-addon-dev-shortcuts/issues"
   },
   "license": "MIT",
   "scripts": {
